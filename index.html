@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TeslaNova Investments</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">🚀 TeslaNova</div>
+    <nav>
+      <a href="#why">Why Join</a>
+      <a href="#giveaway">Giveaway</a>
+      <a href="#signup">Sign Up</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1><span class="animated-text">Start With $100. Earn Up to 10x.</span></h1>
+    <p>Your journey to wealth begins with TeslaNova.</p>
+    <a href="#signup" class="cta">Get Started</a>
+  </section>
+
+  <section id="why" class="features">
+    <h2>Why Choose TeslaNova?</h2>
+    <div class="grid">
+      <div class="feature-card">🔐 Safe & Transparent</div>
+      <div class="feature-card">🚀 Fast Returns (24–72hrs)</div>
+      <div class="feature-card">🎁 Tesla Giveaways Weekly</div>
+    </div>
+  </section>
+
+  <section id="giveaway" class="giveaway">
+    <h2>🎉 Tesla Giveaway</h2>
+    <p>Invest and stand a chance to win a brand-new Tesla!</p>
+    <div id="countdown"></div>
+    <div class="tiers">
+      <div>Bronze: $100+</div>
+      <div>Silver: $250+</div>
+      <div>Gold: $500+</div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Investors Say</h2>
+    <div class="carousel">
+      <div class="testimonial">“I started with $100. Now I drive a Tesla!”</div>
+      <div class="testimonial">“TeslaNova changed my life. I quit my job.”</div>
+      <div class="testimonial">“Fast results. Real support. 10/10.”</div>
+    </div>
+  </section>
+
+  <section id="signup" class="form-section">
+    <h2>Sign Up Today</h2>
+    <form action="https://formspree.io/f/xpwropgw" method="POST" onsubmit="submitSuccess(event)">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <button type="submit">Join Now</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 TeslaNova Investments. All rights reserved.</p>
+  </footer>
+
+  <a href="https://t.me/Teslanovainvestment" class="telegram-float" target="_blank">📨</a>
+
+  <script>
+    function submitSuccess(e) {
+      e.preventDefault();
+      const form = e.target;
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      }).then(response => {
+        if (response.ok) {
+          Swal.fire("🎉 Success!", "You're now on your way to 10x returns.", "success");
+          form.reset();
+        } else {
+          Swal.fire("Oops!", "There was an issue. Try again.", "error");
+        }
+      });
+    }
+
+    function startCountdown() {
+      const countDownDate = new Date().getTime() + 7 * 24 * 60 * 60 * 1000;
+      const countdownEl = document.getElementById("countdown");
+      const x = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        countdownEl.innerHTML = "Next Tesla Draw: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        if (distance < 0) {
+          clearInterval(x);
+          countdownEl.innerHTML = "🚗 Drawing Today!";
+        }
+      }, 1000);
+    }
+    startCountdown();
+  </script>
+</body>
+</html>
